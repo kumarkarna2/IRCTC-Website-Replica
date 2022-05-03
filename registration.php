@@ -77,7 +77,7 @@
         $password = mysqli_real_escape_string($con, $password);
         $create_datetime = date("Y-m-d H:i:s");
         $query    = "INSERT into `loginx` (username, password, email, create_datetime)
-                     VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime')";
+                     VALUES ('$username', '$password', '$email', '$create_datetime')";
         $result   = mysqli_query($con, $query);
         if ($result) {
             echo "<div class='form'>
@@ -95,7 +95,7 @@
     <form class="form" action="" method="post">
         <h1 class="login-title">Registration</h1>
         <input type="text" class="login-input" name="username" placeholder="Username" required />
-        <input type="text" class="login-input" name="email" placeholder="Email Adress">
+        <input type="email" class="login-input" name="email" placeholder="Email Adress">
         <input type="password" class="login-input" name="password" placeholder="Password">
         <input type="submit" name="submit" value="Register" class="login-button"><br><br> 
         <p class="link">Already have an account? <br><br> <a href="login.php"><ul><center>Login here</center></ul></a></p>
