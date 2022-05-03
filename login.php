@@ -46,10 +46,8 @@
 				  <li class="has-child">
                       <a href="index.html">Home</a></li>
 					<li class="has-child">
-                      <a href="javascript:void(0);">About Us</a>
-                        <ul class="sub-menu">
-                          <li><a href="about.html"> About Us </a></li>
-                        </ul>
+                      <a href="about.html">About Us</a>
+                        
                     </li>
 					<li class="has-child">
                       <a href="login.php">Login</a>
@@ -63,7 +61,7 @@
     </div>
   </header><br><br><br><br><br><br><br><br>
 <?php
-    require('db.php');
+    require('connection_check.php');
     session_start();
     // When form submitted, check and create user session.
     if (isset($_POST['username'])) {
@@ -72,7 +70,7 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
         // Check user is exist in the database
-        $query    = "SELECT * FROM `users` WHERE username='$username'
+        $query    = "SELECT * FROM `login` WHERE username='$username'
                      AND password='" . md5($password) . "'";
         $result = mysqli_query($con, $query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
@@ -132,7 +130,7 @@
           </div>
         </div>
       </div>
-<div class="copyright">© 2021 IRCTC | MINI PROJECT BY Himanshu, Mayank, Yogesh.</div>
+<div class="copyright">© 2021 IRCTC | MINI PROJECT BY KARNA KUMAR CHAUDHARY.</div>
 </footer>
 <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
   <i class="fa fa-arrow-up"></i>

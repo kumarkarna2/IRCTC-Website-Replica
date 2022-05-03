@@ -64,7 +64,7 @@
     </div>
   </header><br><br><br><br><br><br><br><br>
 <?php
-    require('db.php');
+    require('connection_check.php');
     // When form submitted, insert values into the database.
     if (isset($_REQUEST['username'])) {
         // removes backslashes
@@ -76,7 +76,7 @@
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($con, $password);
         $create_datetime = date("Y-m-d H:i:s");
-        $query    = "INSERT into `users` (username, password, email, create_datetime)
+        $query    = "INSERT into `loginx` (username, password, email, create_datetime)
                      VALUES ('$username', '" . md5($password) . "', '$email', '$create_datetime')";
         $result   = mysqli_query($con, $query);
         if ($result) {
@@ -137,7 +137,7 @@
           </div>
         </div>
       </div>
-<div class="copyright">© 2021 IRCTC | MINI PROJECT BY Himanshu, Mayank, Yogesh.</div>
+<div class="copyright">© 2021 IRCTC | MINI PROJECT BY KARNA KUMAR CHAUDHARY.</div>
 </footer>
 <a id="back-to-top" href="#" class="back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left">
   <i class="fa fa-arrow-up"></i>
