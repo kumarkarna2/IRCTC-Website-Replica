@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +35,7 @@
 <header class="main_header fixed_header">
     <div class="container clearfix">
       <div class="logo_head">
-        <a href="index.html"><img src="assets/images/irctc-new-logo.png" alt=""></a>
+        <a href="index.php"><img src="assets/images/irctc-new-logo.png" alt=""></a>
       </div>
       <div class="navbar-expand-lg nav_btn_toggle">    
         <button class="navbar-toggler open_mobile_menu" type="button" data-target="#topNavMobile">
@@ -44,13 +48,13 @@
               <div class="collapse navbar-collapse" id="topNav">
                   <ul class="navbar-nav">
 				  <li class="has-child">
-                      <a href="index.html">Home</a></li>
+                      <a href="index.php">Home</a></li>
 					<li class="has-child">
                       <a href="about.html">About Us</a>
                         
                     </li>
-					<li class="has-child">
-                      <a href="login.php">Login</a>
+				
+                     
 					  <li><a href="registration.php">Register</a></li>
                       <li><a href="contact.html">Contact us </a></li>
 
@@ -62,7 +66,7 @@
   </header><br><br><br><br><br><br><br><br>
 <?php
     require('connection_check.php');
-    session_start();
+    // session_start();
     // When form submitted, check and create user session.
     if (isset($_POST['username'])) {
         $username = stripslashes($_REQUEST['username']);    // removes backslashes
@@ -74,10 +78,14 @@
                      AND password='$password'";
         $result = mysqli_query($con, $query) or die(mysql_error());
         $rows = mysqli_num_rows($result);
+       
+       
         if ($rows == 1) {
             $_SESSION['username'] = $username;
-            // Redirect to user dashboard page
-            header("Location: dashboard.php");
+         
+        // Welcome message
+        $_SESSION['success'] = "You have logged in";
+            header("Location:index.php");
         } else {
             echo "<div class='form'>
                   <h3>Incorrect Username/password.</h3><br/>
