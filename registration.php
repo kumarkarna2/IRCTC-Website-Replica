@@ -63,6 +63,28 @@
     </div>
   </header><br><br><br><br><br><br><br><br>
 <?php
+ $emailErr="";
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+   //Email Validation   
+    if (empty($_POST["email"])) {  
+            $emailErr = "Email is required";  
+    } else {  
+            $email = input_data($_POST["email"]);  
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {  
+                $emailErr = "Invalid email format";  
+            }  
+     }  
+}
+function input_data($data) {  
+  $data = trim($data);  
+  $data = stripslashes($data);  
+  $data = htmlspecialchars($data);  
+  return $data;  
+}  ?>
+ ?>
+
+<?php
     require('connection_check.php');
     // When form submitted, insert values into the database.
     if (isset($_REQUEST['username'])) {
@@ -78,7 +100,17 @@
         $query    = "INSERT into `loginx` (username, password, email, create_datetime)
                      VALUES ('$username', '$password', '$email', '$create_datetime')";
         $result   = mysqli_query($con, $query);
-        if ($result) {
+        
+$select = mysqli_query($con, "SELECT * FROM loginx WHERE email = '".$_POST['email']."'");
+if(mysqli_num_rows($select)) {
+   echo "<div class='form'>
+                  <h3>This email address is already used!</h3><br/>
+                  <p class='link'>Click here to <a href='login.php'>Login</a></p>
+                  </div>";
+    // exit('This email address is already used!');
+}
+
+       else if ($result) {
             echo "<div class='form'>
                   <h3>You are registered successfully.</h3><br/>
                   <p class='link'>Click here to <a href='login.php'>Login</a></p>
@@ -94,8 +126,8 @@
     <form class="form" action="" method="post">
         <h1 class="login-title">Registration</h1>
         <input type="text" class="login-input" name="username" placeholder="Username" required />
-        <input type="email" class="login-input" name="email" placeholder="Email Adress">
-        <input type="password" class="login-input" name="password" placeholder="Password">
+        <input type="email" class="login-input" name="email" placeholder="Email Adress" required>
+        <input type="password" class="login-input" name="password" placeholder="Password" required>
         <input type="submit" name="submit" value="Register" class="login-button"><br><br> 
         <p class="link">Already have an account? <br><br> <a href="login.php"><ul><center>Login here</center></ul></a></p>
     </form>

@@ -118,12 +118,12 @@ window.onclick = function(event) {
               <div class="collapse navbar-collapse" id="topNav">
                   <ul class="navbar-nav">
 					<li class="has-child">
-                      <a href="about.html">About Us</a>
+                      <a href="about.php">About Us</a>
                      
                     </li>
 					
 					  
-                      <li><a href="contact.html">Contact us </a></li>
+                      <li><a href="contact.php">Contact us </a></li>
           <li><a href="logout.php">Log out</a></li>
 
                   </ul>

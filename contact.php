@@ -1,3 +1,8 @@
+<?php
+session_start();
+if(!isset($_SESSION['username']))
+header('location:contact.html')
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,6 +68,14 @@
     button:hover {
       border: 2px solid black;
     }
+    .user ul{
+  margin:auto;
+  padding:1.5rem;
+  font-weight:500;
+  font-size:1.2rem;
+  color:red;
+  margin-right:0;
+}
   </style>
 </head>
 
@@ -89,14 +102,18 @@
                 <a href="index.php">Home</a>
               </li>
               <li class="has-child">
-                <a href="about.html">About Us</a>
+                <a href="about.php">About Us</a>
 
               </li>
 
-              <li><a href="login.php">Login</a></li>
-              <li><a href="registration.php">Register</a></li>
-            </ul>
+              <li><a href="logout.php">Log out</a></li>
 
+            </ul>
+                    <div class="user">
+
+  <ul>Hello <?php echo $_SESSION['username'];?></ul>
+</div>
+           
           </div>
         </nav>
 
